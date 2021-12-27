@@ -1,0 +1,4 @@
+## gitignore for the project based on Xcode
+## The list user data
+
+xcuserdata/
