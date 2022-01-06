@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		767DE2BF2786778E00A0DFD9 /* ClimaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767DE2BE2786778E00A0DFD9 /* ClimaUITests.swift */; };
 		767DE2C12786778E00A0DFD9 /* ClimaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767DE2C02786778E00A0DFD9 /* ClimaUITestsLaunchTests.swift */; };
+		767DE2C82786789700A0DFD9 /* ClimaKeyboardInteractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767DE2C72786789700A0DFD9 /* ClimaKeyboardInteractionTests.swift */; };
 		ADAA27B1231BBFAF00365194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA27B0231BBFAF00365194 /* AppDelegate.swift */; };
 		ADAA27B3231BBFAF00365194 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA27B2231BBFAF00365194 /* SceneDelegate.swift */; };
 		ADAA27B5231BBFAF00365194 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA27B4231BBFAF00365194 /* WeatherViewController.swift */; };
@@ -34,6 +35,7 @@
 		767DE2BC2786778E00A0DFD9 /* ClimaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClimaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		767DE2BE2786778E00A0DFD9 /* ClimaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClimaUITests.swift; sourceTree = "<group>"; };
 		767DE2C02786778E00A0DFD9 /* ClimaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClimaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		767DE2C72786789700A0DFD9 /* ClimaKeyboardInteractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClimaKeyboardInteractionTests.swift; sourceTree = "<group>"; };
 		ADAA27AD231BBFAF00365194 /* Clima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADAA27B0231BBFAF00365194 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADAA27B2231BBFAF00365194 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			children = (
 				767DE2BE2786778E00A0DFD9 /* ClimaUITests.swift */,
 				767DE2C02786778E00A0DFD9 /* ClimaUITestsLaunchTests.swift */,
+				767DE2C72786789700A0DFD9 /* ClimaKeyboardInteractionTests.swift */,
 			);
 			path = ClimaUITests;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			files = (
 				767DE2BF2786778E00A0DFD9 /* ClimaUITests.swift in Sources */,
 				767DE2C12786778E00A0DFD9 /* ClimaUITestsLaunchTests.swift in Sources */,
+				767DE2C82786789700A0DFD9 /* ClimaKeyboardInteractionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
