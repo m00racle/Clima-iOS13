@@ -25,6 +25,14 @@ class ClimaKeyboardInteractionTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testTapSearchTextFieldShowKeybaord() throws {
+//        record the interaction to tap the text field
+        let app = XCUIApplication()
+        app.textFields["Search"].tap()
+//        assert keyboard show
+        XCTAssertTrue(app.keys.element(boundBy: 0).exists)
+    }
 
     func testTapSearchButtonHideKeyboard() throws {
         // Use recording to get started writing UI tests.
