@@ -59,5 +59,27 @@ class ClimaKeyboardInteractionTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         XCTAssertFalse(app.keys.element(boundBy: 0).exists)
     }
-
+    
+    func testTapGoKeyHideKeybaord() throws {
+        
+        let app = XCUIApplication()
+        app.textFields["Search"].tap()
+        
+        let rKey = app/*@START_MENU_TOKEN@*/.keys["r"]/*[[".keyboards.keys[\"r\"]",".keys[\"r\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        rKey.tap()
+        
+        let oKey = app/*@START_MENU_TOKEN@*/.keys["o"]/*[[".keyboards.keys[\"o\"]",".keys[\"o\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        oKey.tap()
+        
+        let mKey = app/*@START_MENU_TOKEN@*/.keys["m"]/*[[".keyboards.keys[\"m\"]",".keys[\"m\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        mKey.tap()
+        
+        let eKey = app/*@START_MENU_TOKEN@*/.keys["e"]/*[[".keyboards.keys[\"e\"]",".keys[\"e\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        eKey.tap()
+        
+        app/*@START_MENU_TOKEN@*/.buttons["Go"]/*[[".keyboards",".buttons[\"go\"]",".buttons[\"Go\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssertFalse(app.keys.element(boundBy: 0).exists)
+    }
 }
