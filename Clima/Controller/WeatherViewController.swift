@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -17,11 +17,22 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.search textfield
+//        delegate keybard interaction to
+        searchTextField.delegate = self
     }
 
     @IBAction func searchButtonPressed(_ sender: UIButton) {
+//        hide the keyboard
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        this is what happen if the return key in the keyboard is pressed
+//        note that in the button settings we change the return to go
+        if (searchTextField.text != ""){
+            print(searchTextField.text!)
+        }
+        return true
+    }
 }
 
