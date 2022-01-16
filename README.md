@@ -53,9 +53,13 @@ switch conditionID {
 
 ![End Banner](Documentation/readme-end-banner.png)
 
-## NOTES:
+## NOTES TextField:
 1. The Test on whether keyboard is hidden or not after tapping the "GO" key uses different Assertion.
 2. This is because the process to hide the keybaord requires some waiting time. Thusn in the assertion I uses : XCTAssertFalse(app.keyboards.buttons["a".waitForExistance] (timeout: 5) method.
 3.This will allow me to safely test whether keyboard is really hidden or not.
 
+## NOTES API:
+1. The API uses the openweathermap.org API.
+2. Tested the usage from the browser which has JSON pattern as response.
+3. In this part we will model the API manager to fetch the JSON data and the process it.
 
