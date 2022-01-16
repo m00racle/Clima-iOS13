@@ -52,3 +52,10 @@ switch conditionID {
 >This is a companion project to The App Brewery's Complete App Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
 
 ![End Banner](Documentation/readme-end-banner.png)
+
+## NOTES:
+1. The Test on whether keyboard is hidden or not after tapping the "GO" key uses different Assertion.
+2. This is because the process to hide the keybaord requires some waiting time. Thusn in the assertion I uses : XCTAssertFalse(app.keyboards.buttons["a".waitForExistance] (timeout: 5) method.
+3.This will allow me to safely test whether keyboard is really hidden or not.
+
+
