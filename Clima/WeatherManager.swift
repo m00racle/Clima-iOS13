@@ -1,6 +1,7 @@
 //
 //  WeatherManager.swift
 //  Clima
+// see: [Wiki Session 149](https://github.com/m00racle/Clima-iOS13/wiki/session-149-Use-the-URLSession-for-Networking#session-149-use-the-urlsession-for-networking)
 //
 //  Created by Yanuar Heru on 16/01/22.
 //  Copyright © 2022 App Brewery. All rights reserved.
@@ -21,7 +22,50 @@ struct WeatherManager{
     mutating func fetchWeather(cityName:String) {
         urlString = "\(weatherURL)?appid=\(apiKey)&q=\(cityName)"
 //        print(urlString) not needed since I already use Unit Testto verify this function
+        performRequest(rawUrlString: urlString)
     }
-//    the main objective is to put the city name entry from UI and put it into the full URL address
-//    TODO use the variable name cityURL = 
+    
+    func performRequest(rawUrlString:String){
+//        create URL:
+        if let url = URL(string: rawUrlString) {
+//            create URL session
+            let session = URLSession(configuration: .default)
+//            set the config to default since this is only focusing on giving session the ability to networking.
+            
+//            Give the session a task
+            let task = session.dataTask(with: url, completionHandler: handle(data: response: error:))
+//            choose the reserved dataTask function which has completionHandlers which I defined by external function
+            
+//            Start the task:
+            task.resume()
+//            why resume and not start? well because as said earlier when instantiated this session is in halt barely start but by default the system set it in halt
+            
+        }
+        
+    }
+    
+    func handle(data: Data?, response: URLResponse?, error: Error?) {
+//        this function must handle fetched data if it completed the fetch process
+//        handle response from server
+//        handle errors
+//        but note that if data comes error then null and vice versa thus each parameters are given optional (?) status.
+        
+        if error != nil {
+            print(error!)
+            return
+//            RETURN without anything after it means break and stop out of this function
+        }
+        
+//        no error then proceed to parse the data (remember it comes in format looks like JSON):
+        if let safeData = data {
+//            parse it first:
+            let dataString = String(data: safeData, encoding: .utf8)
+//            parsing the String from safeData with encoding of UTF 8
+            print(dataString)
+
+        }
+        
+    }
+    
+    
 }
