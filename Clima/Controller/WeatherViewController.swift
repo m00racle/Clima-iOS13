@@ -15,7 +15,8 @@ class WeatherViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
     
-//    TODO instantiate the WeatherManager struct to instance weatherManager
+//    instantiate the WeatherManager struct to instance weatherManager
+    var weatherManger = WeatherManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +41,16 @@ class WeatherViewController: UIViewController,UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        TODO I don't need this test anymore just delete it:
-        print(searchTextField.text!)
+//         I don't need this test anymore just delete it:
+//        print(searchTextField.text!)
         
 //        TODO let city = searchTextField text
 //        Be careful this must be wrapped up to ensure city is a String
-//        TODO if let city = searchTextField.text {}
+//        this is why I use if let city to make sure only pass String parameter to the WeatherManager
+        
+        if let city = searchTextField.text {
+            weatherManger.fetchWeather(cityName: city)
+        }
 //        then call the weatherManager.fetchWeather method and pass city as parameter.
         searchTextField.text = ""
     }
