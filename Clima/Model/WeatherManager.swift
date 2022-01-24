@@ -18,7 +18,7 @@ struct WeatherManager{
     //    add new function to get city weather data
     //    func name fetchWeather(cityName:String)
     mutating func fetchWeather(cityName:String) {
-        urlString = "\(weatherURL)?appid=\(apiKey)&q=\(cityName)"
+        urlString = "\(weatherURL)?appid=\(apiKey)&q=\(cityName)&units=metric"
         //        print(urlString) not needed since I already use Unit Testto verify this function
         performRequest(rawUrlString: urlString)
     }
