@@ -10,7 +10,7 @@ import Foundation
 struct WeatherManager{
 //    put the URL address minus the q parameter for the city to search
 //    use variable name weatherURL =
-    let apiKey = "API_SECRET"
+    let apiKey = "f8715d89da920a6b7b9890773d5b8a58"
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather"
 //    NOTE: I need to make var urlString variable here as higher scope to enbale this variable as test variable later on.
     var urlString = ""
