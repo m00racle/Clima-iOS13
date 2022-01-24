@@ -40,18 +40,28 @@ struct WeatherManager{
                 }
                 //        no error then proceed to parse the data (remember it comes in format looks like JSON):
                 if let safeData = data {
-                    //            parse it first:
-                    let dataString = String(data: safeData, encoding: .utf8)
-                    //            parsing the String from safeData with encoding of UTF 8
-                    print(dataString)
+                    // parse the JSON data here:
+                    self.parseJSON(weatherData: safeData)
+                    
                 }
             }
-            //            choose the reserved dataTask function which has completionHandlers which I defined by external function
             
-            //            Start the task:
             task.resume()
-            //            why resume and not start? well because as said earlier when instantiated this session is in halt barely start but by default the system set it in halt
             
+        }
+        
+    }
+    
+    func parseJSON(weatherData: Data) {
+        // make new JSONDecoder instance here:
+        let decoder = JSONDecoder()
+        
+        do {
+            let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
+            
+            print(decodedData.main.temp)
+        } catch {
+            print(error)
         }
         
     }
