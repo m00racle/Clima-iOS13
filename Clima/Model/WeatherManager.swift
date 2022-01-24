@@ -1,14 +1,12 @@
 //
 //  WeatherManager.swift
 //  Clima
-// see: [Wiki Session 149](https://github.com/m00racle/Clima-iOS13/wiki/session-149-Use-the-URLSession-for-Networking#session-149-use-the-urlsession-for-networking)
 //
-//  Created by Yanuar Heru on 16/01/22.
+//  Created by Yanuar Heru on 24/01/22.
 //  Copyright © 2022 App Brewery. All rights reserved.
 //
 
 import Foundation
-
 struct WeatherManager{
 //    put the URL address minus the q parameter for the city to search
 //    use variable name weatherURL =
