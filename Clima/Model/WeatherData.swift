@@ -14,9 +14,14 @@ struct WeatherData: Decodable {
     
     let main: Main
     
+    let weather: [WeatherArray]
 }
 
 struct Main: Decodable {
     let temp: Double
     
+}
+
+struct WeatherArray: Decodable {
+    let description: String
 }
