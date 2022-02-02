@@ -2,6 +2,7 @@
 //  WeatherManager.swift
 //  Clima
 //
+//  https://www.udemy.com/course/ios-13-app-development-bootcamp/learn/lecture/16253688
 //  Created by Yanuar Heru on 24/01/22.
 //  Copyright © 2022 App Brewery. All rights reserved.
 //
@@ -59,9 +60,30 @@ struct WeatherManager{
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
             
-            print(decodedData.weather[0].description)
+            let id = decodedData.weather[0].id
+            print(getConditionName(conditionID: id))
         } catch {
             print(error)
+        }
+        
+    }
+    
+    func getConditionName(conditionID: Int) -> String {
+        switch conditionID {
+        case 200...232:
+            return "cloud.bolt"
+        case 300...321:
+            return "cloud.drizzle"
+        case 500...531:
+            return "cloud.rain"
+        case 600...622:
+            return "cloud.snow"
+        case 701...781:
+            return "cloud.fog"
+        case 801...804:
+            return "cloud.bolt"
+        default:
+            return "cloud"
         }
         
     }
