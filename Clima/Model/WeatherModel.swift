@@ -13,8 +13,10 @@ struct WeatherModel {
     let cityName: String
     let temperature: Double
     
-    func getConditionName(conditionID: Int) -> String {
-        switch conditionID {
+//    computed property in struct:
+    // NOTE: we use var since the value of conditionName (computed prop here) is always changing
+    var conditionName: String {
+        switch conditionId {
         case 200...232:
             return "cloud.bolt"
         case 300...321:
@@ -30,6 +32,11 @@ struct WeatherModel {
         default:
             return "cloud"
         }
-        
+    }
+    
+    //TODO make temperature into String format using computed prop:
+    
+    var temperatureString: String {
+        return String(format: "%.1f", temperature)
     }
 }

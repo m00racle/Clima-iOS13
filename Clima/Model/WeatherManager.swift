@@ -67,7 +67,9 @@ struct WeatherManager{
             let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
             
             
-            print(weather.getConditionName(conditionID: id))
+            print(weather.conditionName)
+            print(weather.temperatureString)
+            // I use computed property from WeatherModel struct to fetch conditionName.
         } catch {
             print(error)
         }
