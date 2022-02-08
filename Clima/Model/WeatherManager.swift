@@ -12,7 +12,11 @@ import Foundation
 // in order to use delgate in the WeatherViewController we need to build delegate protocol here
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(weatherModel: WeatherModel)
+    func didUpdateWeather(_ weatherManager: WeatherManager, weatherModel: WeatherModel)
+    // I add weatherManager using the internal naming thus later on to refer to this you only need to use self
+    
+    // add error handler to delegate
+    func didFailWithError(error: Error)
 }
 
 struct WeatherManager{
@@ -30,35 +34,36 @@ struct WeatherManager{
     // func name fetchWeather(cityName:String)
     mutating func fetchWeather(cityName:String) {
         urlString = "\(weatherURL)?appid=\(apiKey)&q=\(cityName)&units=metric"
-        // print(urlString) not needed since I already use Unit Testto verify this function
-        performRequest(rawUrlString: urlString)
+        //I use with since the func performRequest uses with rawUrlString
+        //this will make code more readable:
+        performRequest(with: urlString)
     }
     
-    func performRequest(rawUrlString:String){
-        //        create URL:
+    func performRequest(with rawUrlString:String){
+        //here I use with to make the fucntion call and parameter passing above easier to read
+        
         if let url = URL(string: rawUrlString) {
             // create URL session
             let session = URLSession(configuration: .default)
-            // set the config to default since this is only focusing on giving session the ability to networking.
             
             // Give the session a task
-            // let task = session.dataTask(with: url, completionHandler: handle(data: response: error:))
+            
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
-                    print(error!)
+                    // pass the error using the delegate
+                    // NOTE: we use self since we call delegate inside a closure!
+                    self.delegate?.didFailWithError(error: error!)
                     return
-                    // RETURN without anything after it means break and stop out of this function
                 }
                 // no error then proceed to parse the data (remember it comes in format looks like JSON):
                 if let safeData = data {
                     // parse the JSON data here:
-                    // Now I want to make the weather data to be returned onto the WeatherViewController
-                    // This means I need to make parseJSON to return to me weatherModel type
+                    
                     if let weather = self.parseJSON(weatherData: safeData) {
                         // this will only executed if the weather is WatherModel type and NOT nil
                         
-                        // we make delegate weather manager to be able to pass the weatherModelType
-                        self.delegate?.didUpdateWeather(weatherModel: weather)
+                        // The delegate requires the Weather Manager to be passed as self as param
+                        self.delegate?.didUpdateWeather(self, weatherModel: weather)
                     }
                     
                 }
@@ -84,14 +89,11 @@ struct WeatherManager{
             let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
             
             // now I need to return WeatherModel type object to the performRequest func
-            // I just return weather
+            
             return weather
         } catch {
-            print(error)
-            // but what if this function failed to decode all the JSON message?
-            // it will only return error which is not WeatherModel type
-            // ANSWER: we can make this func to return optional WeatherModel which WeatherModel?
-            // and we can return nil
+            // same here I need to send this error handling using delegate
+            delegate?.didFailWithError(error: error)
             return nil
         }
         
