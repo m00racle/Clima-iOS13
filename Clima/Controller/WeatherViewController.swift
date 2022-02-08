@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController,UITextFieldDelegate {
+class WeatherViewController: UIViewController,UITextFieldDelegate, WeatherManagerDelegate {
 
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -23,6 +23,9 @@ class WeatherViewController: UIViewController,UITextFieldDelegate {
         // Do any additional setup after loading the view.search textfield
 //        delegate keybard interaction to
         searchTextField.delegate = self
+        
+        // remember to add this delegate function in viewDidLoad so that the delegate will not seen as empty when calling or implementing the didUpdateWeather later on
+        weatherManger.delegate = self
     }
 
     @IBAction func searchButtonPressed(_ sender: UIButton) {
@@ -65,6 +68,11 @@ class WeatherViewController: UIViewController,UITextFieldDelegate {
             textField.placeholder = "type something"
             return false
         }
+    }
+    
+    // we prepare didUpdateWeather function to receive the weathermodel data
+    func didUpdateWeather(weatherModel: WeatherModel) {
+        print(weatherModel.temperatureString)
     }
 }
 

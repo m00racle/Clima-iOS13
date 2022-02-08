@@ -10,7 +10,10 @@
 
 import Foundation
 
-struct WeatherData: Decodable {
+// I change the Decodable into Codable as type alias that combine two protocols Decodable and Encodable
+// Note: Encodable is the inverse of decodable which intended to convert to JSON format.
+
+struct WeatherData: Codable {
     
     let name: String
     
@@ -19,12 +22,12 @@ struct WeatherData: Decodable {
     let weather: [WeatherArray]
 }
 
-struct Main: Decodable {
+struct Main: Codable {
     let temp: Double
     
 }
 
-struct WeatherArray: Decodable {
+struct WeatherArray: Codable {
     let id: Int
 //    I change this to Int to match the documentation on https://openweathermap.org/weather-conditions
 //    this is how the API sent response on the type of weather which is more detailed rather than just the String on what the weather is

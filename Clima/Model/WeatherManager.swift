@@ -8,6 +8,13 @@
 //
 
 import Foundation
+
+// in order to use delgate in the WeatherViewController we need to build delegate protocol here
+
+protocol WeatherManagerDelegate {
+    func didUpdateWeather(weatherModel: WeatherModel)
+}
+
 struct WeatherManager{
     // put the URL address minus the q parameter for the city to search
     // use variable name weatherURL =
@@ -15,6 +22,9 @@ struct WeatherManager{
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather"
     // NOTE: I need to make var urlString variable here as higher scope to enbale this variable as test variable later on.
     var urlString = ""
+    
+    // Now I need to declare the delegate
+    var delegate: WeatherManagerDelegate?
     
     // add new function to get city weather data
     // func name fetchWeather(cityName:String)
@@ -42,7 +52,14 @@ struct WeatherManager{
                 // no error then proceed to parse the data (remember it comes in format looks like JSON):
                 if let safeData = data {
                     // parse the JSON data here:
-                    self.parseJSON(weatherData: safeData)
+                    // Now I want to make the weather data to be returned onto the WeatherViewController
+                    // This means I need to make parseJSON to return to me weatherModel type
+                    if let weather = self.parseJSON(weatherData: safeData) {
+                        // this will only executed if the weather is WatherModel type and NOT nil
+                        
+                        // we make delegate weather manager to be able to pass the weatherModelType
+                        self.delegate?.didUpdateWeather(weatherModel: weather)
+                    }
                     
                 }
             }
@@ -53,7 +70,7 @@ struct WeatherManager{
         
     }
     
-    func parseJSON(weatherData: Data) {
+    func parseJSON(weatherData: Data) -> WeatherModel? {
         // make new JSONDecoder instance here:
         let decoder = JSONDecoder()
         
@@ -66,12 +83,16 @@ struct WeatherManager{
             
             let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
             
-            
-            print(weather.conditionName)
-            print(weather.temperatureString)
-            // I use computed property from WeatherModel struct to fetch conditionName.
+            // now I need to return WeatherModel type object to the performRequest func
+            // I just return weather
+            return weather
         } catch {
             print(error)
+            // but what if this function failed to decode all the JSON message?
+            // it will only return error which is not WeatherModel type
+            // ANSWER: we can make this func to return optional WeatherModel which WeatherModel?
+            // and we can return nil
+            return nil
         }
         
     }
