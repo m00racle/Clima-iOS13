@@ -72,7 +72,15 @@ class WeatherViewController: UIViewController,UITextFieldDelegate, WeatherManage
     
     // we prepare didUpdateWeather function to receive the weathermodel data
     func didUpdateWeather(_ weatherManager: WeatherManager, weatherModel: WeatherModel) {
-        print(weatherModel.temperatureString)
+        DispatchQueue.main.async {
+            self.temperatureLabel.text = weatherModel.temperatureString
+            // DispatchQueue.main.async is the closure to make sure that this code is run after the completion of the background (async) process in this case fetching weather data.
+            // self keyword is needed since we run the code inside a closure.
+            
+            self.conditionImageView.image = UIImage(systemName: weatherModel.conditionName)
+            // same note to the condition icon in this case uses the conditionName from the weatherModel
+            // NOTE: we use UIImage(systemName:) because we use in hous SFIcon to represent the condition, thus calling the icon requires the system name NOT just a NAME.
+        }
     }
     
     func didFailWithError(error: Error) {
