@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 // in order to use delgate in the WeatherViewController we need to build delegate protocol here
 
@@ -36,6 +37,14 @@ struct WeatherManager{
         urlString = "\(weatherURL)?appid=\(apiKey)&q=\(cityName)&units=metric"
         //I use with since the func performRequest uses with rawUrlString
         //this will make code more readable:
+        performRequest(with: urlString)
+    }
+    
+    // using method overloading to use coordinates instead a City name to fetch weather info:
+    mutating func fetchWeather(latitude:CLLocationDegrees, longitude:CLLocationDegrees) {
+        // note the coordinates numbers are not a Double but special type of objects called CLLocationDegree!
+        urlString = "\(weatherURL)?appid=\(apiKey)&lat=\(latitude)&lon=\(longitude)&units=metric"
+        //I use with since the func performRequest uses with rawUrlString
         performRequest(with: urlString)
     }
     
