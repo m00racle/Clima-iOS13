@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController,UITextFieldDelegate, WeatherManagerDelegate {
+class WeatherViewController: UIViewController {
 
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -28,6 +28,11 @@ class WeatherViewController: UIViewController,UITextFieldDelegate, WeatherManage
         weatherManger.delegate = self
     }
 
+    
+}
+
+// MARK: - UITextfiedlDelegate
+extension WeatherViewController: UITextFieldDelegate {
     @IBAction func searchButtonPressed(_ sender: UIButton) {
 //        hide the keyboard
         searchTextField.endEditing(true)
@@ -44,10 +49,6 @@ class WeatherViewController: UIViewController,UITextFieldDelegate, WeatherManage
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-//         I don't need this test anymore just delete it:
-//        print(searchTextField.text!)
-        
-//        TODO let city = searchTextField text
 //        Be careful this must be wrapped up to ensure city is a String
 //        this is why I use if let city to make sure only pass String parameter to the WeatherManager
         
@@ -60,8 +61,6 @@ class WeatherViewController: UIViewController,UITextFieldDelegate, WeatherManage
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
 //        this is to validate if text field should end editing if user press outside the text field or keyboard
-//        if text == "" then end editing
-//        else text = "type something"
         if (textField.text != "") {
             return true
         } else {
@@ -69,7 +68,12 @@ class WeatherViewController: UIViewController,UITextFieldDelegate, WeatherManage
             return false
         }
     }
-    
+
+}
+
+// MARK: - WeatherManagerDelegate
+
+extension WeatherViewController: WeatherManagerDelegate {
     // we prepare didUpdateWeather function to receive the weathermodel data
     func didUpdateWeather(_ weatherManager: WeatherManager, weatherModel: WeatherModel) {
         DispatchQueue.main.async {
@@ -87,4 +91,3 @@ class WeatherViewController: UIViewController,UITextFieldDelegate, WeatherManage
         print(error)
     }
 }
-
